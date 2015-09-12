@@ -1,2 +1,2 @@
-# server_monitoring
-A simple server monitoring system using both Flask and Django (for study purpose)
+# Simple Server Monitoring System
+This repository contains both Flask and Django implementation for this system.
