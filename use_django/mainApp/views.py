@@ -6,14 +6,23 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from .forms import LoginForm
 from .models import Server
+import os, subprocess
+
+# Check whether a server is alive using Ping
+def isAlive(server):
+	command = ['ping', '-n', '1', '-w', '1000', server]
+	with open(os.devnull, 'w') as DEVNULL:
+		res = subprocess.call(command, stdout=DEVNULL, stderr=DEVNULL)
+		return res
 
 # Index view - display name, description and status for all servers
-class IndexView(generic.ListView):
-	template_name = 'mainApp/index.html'
-	context_object_name = 'serverList'
+def index(request):
+	serverList = Server.objects.values()
 
-	def get_queryset(self):
-		return Server.objects.order_by('servername')
+	for server in serverList:
+		server['status'] = isAlive(server['servername'])
+
+	return render(request, 'mainApp/index.html', {'serverList': serverList})
 
 def userLogin(request):
 	if request.method == 'POST':

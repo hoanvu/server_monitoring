@@ -6,7 +6,9 @@
 	{% if user.is_authenticated %}
 		<div id="addServerForm">
 			{% if message %}
-				<p> <strong> {{ message }} </strong> </p>
+				<div id="message">
+					<p> <strong> {{ message }} </strong> </p>
+				</div>
 			{% endif %}
 
 			<form action="{% url 'mainApp:addServer' %}" method="post" id="addServerFormContent"> 
@@ -28,7 +30,7 @@
 		</div>
 	{% endif %}
 
-	<div class="content">
+	<div id="content">
 		<table class="table table-striped">
 			<tr>
 				<th>Server Name</th>
@@ -42,7 +44,13 @@
 					<tr>
 						<td>{{ server.servername }}</td>
 						<td>{{ server.description }}</td>
-						<td>Online</td>
+
+						{% if not server.status %}
+							<td id="online">Online</td>
+						{% else %}
+							<td id="offline">Offline</td>
+						{% endif %}
+
 						<td>
 							<form action="{% url 'mainApp:removeServer' server.id %}" method="post">
 								{% csrf_token %}

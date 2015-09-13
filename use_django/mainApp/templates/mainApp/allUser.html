@@ -3,7 +3,9 @@
 {% block body %}
 	<div id="addUserForm">
 		{% if message %}
-			<strong>{{ message }}</strong>
+			<div id="message">
+				<p> <strong>{{ message }}</strong> </p>
+			</div>
 		{% endif %}
 
 		<form action="{% url 'mainApp:addUser' %}" method="post" id="addUserFormContent">

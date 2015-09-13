@@ -49,3 +49,20 @@ input {
 	margin-top: 5px;
 	margin-left: 5px;
 }
+
+#message {
+	padding-left: 10px;
+	color: red;
+}
+
+footer {
+	text-align: center;
+}
+
+#online {
+	color: blue;
+}
+
+#offline {
+	color: red;
+}

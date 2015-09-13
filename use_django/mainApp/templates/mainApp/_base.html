@@ -2,8 +2,8 @@
 {% load staticfiles %}
 
 <title>Server Monitoring</title>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-<link rel="stylesheet" href="{% static 'mainApp/style.css' %}">
+<link rel="stylesheet" href="{% static 'mainApp/css/bootstrap.min.css' %}">
+<link rel="stylesheet" href="{% static 'mainApp/css/style.css' %}">
 
 <div class="container">
 	<nav class="navbar navbar-default">
@@ -30,6 +30,9 @@
 	
 	<hr>
 	<footer>
-		<p class="text-muted text-center credit">Simple Server Monitoring System</p>
+		<span class="text-muted text-center credit">Simple Server Monitoring System</span>
 	</footer>
 </div>
+
+<script src="{% static 'mainApp/js/jquery.min.js' %}"></script>
+<script src="{% static 'mainApp/js/main.js' %}"></script>
