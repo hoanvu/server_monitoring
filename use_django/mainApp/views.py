@@ -43,13 +43,30 @@ def userLogout(request):
 @login_required
 def addServer(request):
 	if request.method == 'POST':
-		servername = request.POST.get('servername')
+		# Strip all whitespaces around server name
+		servername = request.POST.get('servername').strip()
 		description = request.POST.get('description')
 
-		server = Server(servername=servername, description=description)
-		server.save()
+		serverList = Server.objects.all()
+		servernames = [server.servername for server in serverList]
 
-		return HttpResponseRedirect('/mainApp/')
+		# If server name is empty
+		if not servername:
+			message = 'Server name can not be empty.'
+		# If server name already exists
+		elif servername in servernames:
+			message = 'Server name already exists.'
+		else: # otherwise
+			server = Server(servername=servername, description=description)
+			server.save()
+
+			return HttpResponseRedirect('/mainApp/')
+
+		# Render index page contain all servers with proper message
+		return render(request, 'mainApp/index.html', {
+			'serverList': serverList,
+			'message': message
+		})
 
 # Remove a server from monitoring system
 @login_required

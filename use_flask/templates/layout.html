@@ -1,0 +1,30 @@
+<!doctype html>
+<title>Server Monitoring</title>
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+<div class="container">
+	<nav class="navbar navbar-default">
+		<div class="container-fluid">
+			<a class="navbar-brand" href="/">Server Monitoring</a>
+			{% if not session.logged_in %}	<!-- if user not logged in, show Login link -->
+				<p class="navbar-text navbar-right login"> <a href="/login">Login (default: <strong>admin</strong> / <strong>admin</strong>)</a> </p>
+			{% else %}	<!-- otherwise, show logout link -->
+				<p class="navbar-text navbar-left"> <a href="/addUser"> Add User </a> </p>
+				<p class="navbar-text navbar-right logout"> <a href="/logout"> Logout </a> </p>
+			{% endif %}
+		</div>
+	</nav>
+
+	<!-- Sub template -->
+	{% block body %} {% endblock %}
+	
+	<hr>
+	<footer>
+		<p class="text-muted text-center credit">Simple Server Monitoring System</p>
+	</footer>
+</div>
+
+<script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+<script src="{{ url_for('static', filename='main.js') }}"></script>

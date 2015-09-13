@@ -1,0 +1,46 @@
+{% extends "layout.html" %}
+{% block body %}
+
+	{% if session.logged_in %}
+		<form action="{{ url_for('add_server') }}" method=post>
+			<dl>
+				<strong>Server Name: </strong>
+				<input type="text" size=20 name=name class="input">
+				<input type="submit" value="Add" class="btn btn-primary btn-sm">
+			</dl>
+		</form>
+	{% endif %}
+
+	<div id="content">
+		<table class="table table-striped">
+				<tr>
+					<th class="header">SERVER</th>
+					<th class="header">STATUS</th>	
+					<th class="header">ACTION</th>			
+				</tr>
+
+
+			{% for server in serverList %}		
+				<tr> 
+					<td class="server-name"> {{ server.serverName }} </td> 
+					{% if server.status == 0 %}
+						<td class="online"> Online </td>
+					{% else %}
+						<td class="offline"> Offline </td>
+					{% endif %}
+
+					<td>
+						<form action="/removeServer/{{server.id}}" method="post">
+							<!-- Only allow logged in user to remove server -->
+							{% if session.logged_in %}
+								<input type="submit" value="Remove" class="btn btn-danger btn-sm">
+							{% else %}
+								<input type="submit" value="Remove" class="btn btn-danger btn-sm" disabled>
+							{% endif %}
+						</form>
+					</td>
+				</tr>	
+			{% endfor %}
+		</table>
+	</div>
+{% endblock %}

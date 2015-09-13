@@ -1,0 +1,33 @@
+.login, .logout {
+	padding-right: 20px;
+}
+
+.header {
+	font-weight: bold;
+	color: blue;
+}
+
+.server-name {
+	font-weight: bold;
+}
+
+.online {
+	font-weight: bold;
+	color: green;
+}
+
+.offline {
+	color: red;
+}
+
+.table {
+	margin-top: 30px;
+}
+
+.error {
+	color: red;
+}
+
+.input {
+	height: 30px;
+}

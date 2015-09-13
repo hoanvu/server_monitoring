@@ -5,6 +5,10 @@
 	<!-- if user is logged in, show the add server form -->
 	{% if user.is_authenticated %}
 		<div id="addServerForm">
+			{% if message %}
+				<p> <strong> {{ message }} </strong> </p>
+			{% endif %}
+
 			<form action="{% url 'mainApp:addServer' %}" method="post" id="addServerFormContent"> 
 				{% csrf_token %}
 				<p>
