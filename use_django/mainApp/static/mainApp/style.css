@@ -1,0 +1,51 @@
+.login {
+	padding-right: 20px;
+}
+
+.logout {
+	padding-right: 20px;
+}
+
+.loginForm {
+	margin: 0 auto;
+}
+
+#addServerForm {
+	border: 1px solid #E6EBE6;
+	border-radius: 5px;
+	margin: 10px 0 10px 0;
+}
+
+#addServerFormContent {
+	padding: 10px;
+}
+
+#addUserForm {
+	border: 1px solid #E6EBE6;
+	border-radius: 5px;
+	margin: 10px 0 10px 0;
+}
+
+#addUserFormContent {
+	padding: 10px;
+}
+
+form  { 
+	display: table;      
+}
+
+p     { 
+	display: table-row;  
+}
+
+label { 
+	display: table-cell; 
+	margin-top: 5px;
+	margin-left: 5px;
+}
+
+input { 
+	display: table-cell; 
+	margin-top: 5px;
+	margin-left: 5px;
+}

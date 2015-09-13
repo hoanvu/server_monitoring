@@ -1,0 +1,61 @@
+{% extends 'mainApp/_base.html' %}
+
+{% block body %}
+	
+	<!-- if user is logged in, show the add server form -->
+	{% if user.is_authenticated %}
+		<div id="addServerForm">
+			<form action="{% url 'mainApp:addServer' %}" method="post" id="addServerFormContent"> 
+				{% csrf_token %}
+				<p>
+					<label>Server Name: </label>
+					<input type="text" name="servername"> <br>
+				</p>
+				<p>
+					<label>Description: </label> 
+					<input type="text" name="description"> <br>
+				</p>
+
+				<p>
+					<label>  </label> 
+					<input type="submit" value="Add Server" class="btn btn-primary btn-sm"> 
+				</p>
+			</form>
+		</div>
+	{% endif %}
+
+	<div class="content">
+		<table class="table table-striped">
+			<tr>
+				<th>Server Name</th>
+				<th>Description</th>
+				<th>Status</th>
+				<th>Action</th>
+			</tr>
+
+			{% if serverList %}
+				{% for server in serverList %}
+					<tr>
+						<td>{{ server.servername }}</td>
+						<td>{{ server.description }}</td>
+						<td>Online</td>
+						<td>
+							<form action="{% url 'mainApp:removeServer' server.id %}" method="post">
+								{% csrf_token %}
+								{% if user.is_authenticated %}
+									<input type="submit" value="Remove" name="removeServer" class="btn btn-danger btn-xs">
+								{% else %}
+									<input type="submit" value="Remove" name="removeServer" class="btn btn-danger btn-xs" disabled>
+								{% endif %}
+							</form>
+						</td>	
+					</tr>
+				{% endfor %}
+
+			{% else %}
+				<strong>No server to display</strong>
+			{% endif %}
+		</table>
+	</div>
+
+{% endblock %}

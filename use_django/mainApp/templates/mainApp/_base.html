@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+
+<title>Server Monitoring</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<link rel="stylesheet" href="{% static 'mainApp/style.css' %}">
+
+<div class="container">
+	<nav class="navbar navbar-default">
+		<div class="container-fluid">
+			<a class="navbar-brand" href="{% url 'mainApp:index' %}">Server Monitoring</a>
+			{% if not user.is_authenticated %}	<!-- if user not logged in, show Login link -->
+				<p class="navbar-text navbar-right login"> <a href="{% url 'mainApp:userLogin' %}">
+					Login (default: <strong>admin</strong> / <strong>admin</strong>)</a> 
+				</p>
+			{% else %}	<!-- otherwise, show logout link -->
+				<p class="navbar-text navbar-left"> <a href="{% url 'mainApp:allUser' %}"> Add User </a> </p>
+				<p class="navbar-text navbar-right logout"> Hi, {{ user.username }} - 
+					<a href="{% url 'mainApp:userLogout' %}"> 
+						Logout 
+					</a> 
+				</p>
+			{% endif %}
+		</div>
+	</nav>
+
+	<!-- Sub template -->
+	{% block body %} 
+	{% endblock %}
+	
+	<hr>
+	<footer>
+		<p class="text-muted text-center credit">Simple Server Monitoring System</p>
+	</footer>
+</div>

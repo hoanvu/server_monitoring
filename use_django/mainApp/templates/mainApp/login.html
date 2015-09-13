@@ -1,0 +1,32 @@
+{% extends 'mainApp/_base.html' %}
+
+{% block body %}
+	{% if message %}
+		<strong> {{ message }} </strong>
+	{% endif %}
+
+	<div class="loginForm">
+		<form action="{% url 'mainApp:userLogin' %}" method="post">
+			{% csrf_token %}
+
+				<div class="control-group">
+            <label class="control-label" for="username">Username</label>
+            <div class="controls">
+                <input type="text" id="username" name="username" value=""  placeholder="Username">
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="password">Password</label>
+            <div class="controls">
+                <input type="password" name="password" id="password" value="" placeholder="Password">
+            </div>
+        </div>
+        <div class="control-group">
+            <div class="controls">
+                <button type="submit" class="btn">Login</button>
+            </div>
+        </div>
+
+		</form>
+	</div>
+{% endblock %}
