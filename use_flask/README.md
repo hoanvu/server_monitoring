@@ -12,6 +12,9 @@ $ python server.py
 ```
 And enjoy, access: http://127.0.0.1:5000
 
+### Configuration
+You should change the SENDER_USER, SENDER_PASS and RECEIVER in <strong>config.cfg</strong> for the send/receive email function to work. Notice that you should disable 2-step verification in the SENDER_USER email.
+
 ### Need to improve
 - Algorithm to check server status is simple, so the app will be slow for many servers
 - Password need to be hashed or encrypted before storing to database

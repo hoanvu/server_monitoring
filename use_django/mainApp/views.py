@@ -4,16 +4,9 @@ from django.views import generic
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from .forms import LoginForm
 from .models import Server
+from .extras import sendEmail, isAlive
 import os, subprocess
-
-# Check whether a server is alive using Ping
-def isAlive(server):
-	command = ['ping', '-n', '1', '-w', '1000', server]
-	with open(os.devnull, 'w') as DEVNULL:
-		res = subprocess.call(command, stdout=DEVNULL, stderr=DEVNULL)
-		return res
 
 # Index view - display name, description and status for all servers
 def index(request):
@@ -22,8 +15,13 @@ def index(request):
 	for server in serverList:
 		server['status'] = isAlive(server['servername'])
 
+		# If ping result is 1, means server offline, send email
+		if server['status'] == 1:
+			sendEmail(server['servername'])
+
 	return render(request, 'mainApp/index.html', {'serverList': serverList})
 
+# Route for user to login
 def userLogin(request):
 	if request.method == 'POST':
 		username = request.POST.get('username')
@@ -31,7 +29,9 @@ def userLogin(request):
 
 		user = authenticate(username=username, password=password)
 
+		# If username entered exists
 		if user is not None:
+			# and account must be active, log him in
 			if user.is_active:
 				login(request, user)
 				return HttpResponseRedirect('/mainApp/')

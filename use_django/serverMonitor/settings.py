@@ -27,7 +27,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
 # Application definition
 
 INSTALLED_APPS = (
@@ -101,3 +100,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# Configurations for email handling
+SENDER_EMAIL = 'loaloa.test@gmail.com'
+SENDER_PASS = 'testaccount@11033'
+RECEIVER_EMAIL = 'hoanock@gmail.com'
