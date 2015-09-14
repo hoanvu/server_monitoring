@@ -102,6 +102,6 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 # Configurations for email handling
-SENDER_EMAIL = 'loaloa.test@gmail.com'
-SENDER_PASS = 'testaccount@11033'
-RECEIVER_EMAIL = 'hoanock@gmail.com'
+SENDER_EMAIL = 'test_account@gmail.com'
+SENDER_PASS = 'test_password'
+RECEIVER_EMAIL = 'receiver_email'

@@ -25,7 +25,7 @@ def sendEmail(serverName):
 	email.attach(body)	
 
 	email["From"] = "Notification"
-	email["To"] = "vumaihoan@gmail.com"
+	email["To"] = "receiver_email"
 	email["Subject"] = "Alert! Server down!!!"
 
 	try:
