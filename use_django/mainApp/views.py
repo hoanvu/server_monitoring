@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect, HttpResponse
 from django.views import generic
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import authenticate, login, views
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from .models import Server
@@ -23,6 +23,7 @@ def index(request):
 
 # Route for user to login
 def userLogin(request):
+	message = ''
 	if request.method == 'POST':
 		username = request.POST.get('username')
 		password = request.POST.get('password')
@@ -36,17 +37,16 @@ def userLogin(request):
 				login(request, user)
 				return HttpResponseRedirect('/mainApp/')
 			else:
-				return HttpResponse('Account is disabled.')
+				message = 'Account is disabled.'
 		else:
-			return HttpResponse('Incorrect username/password.')
-	else:
-		return render(request, 'mainApp/login.html')
+			message = 'Incorrect username/password.'
+
+	return render(request, 'mainApp/login.html', {'message': message})
 
 # Log a user out
 @login_required
 def userLogout(request):
-	logout(request)
-	return HttpResponseRedirect('/mainApp/')
+	return views.logout(request, next_page='/mainApp/', template_name='mainApp/index.html')
 
 # Add new server
 @login_required

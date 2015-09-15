@@ -54,7 +54,7 @@
 						<td>
 							<form action="{% url 'mainApp:removeServer' server.id %}" method="post">
 								{% csrf_token %}
-								{% if user.is_authenticated %}
+								{% if request.user.is_authenticated %}
 									<input type="submit" value="Remove" name="removeServer" class="btn btn-danger btn-xs">
 								{% else %}
 									<input type="submit" value="Remove" name="removeServer" class="btn btn-danger btn-xs" disabled>
